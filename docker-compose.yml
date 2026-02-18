@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  panel:
+    build: .
+    container_name: mc-panel
+    restart: always
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - minecraft_data:/data
+      - minecraft_data:/data
+    environment:
+      - SFTPGO_URL=http://sftpgo:8080/api/v2
+      - SFTPGO_USER=${SFTPGO_ADMIN_USER:-admin}
+      - SFTPGO_PASS=${SFTPGO_ADMIN_PASSWORD:-password}
+    depends_on:
+      - sftpgo
+
+  sftpgo:
+    image: drakkan/sftpgo:v2
+    container_name: sftpgo
+    restart: always
+    ports:
+      - "${SFTPGO_WEB_PORT:-8080}:8080"
+      - "${SFTP_PORT:-2022}:2022"
+    volumes:
+      - sftpgo_data:/var/lib/sftpgo
+      - minecraft_data:/srv/sftpgo/data
+    environment:
+      - SFTPGO_HTTPD__BINDINGS__0__PORT=8080
+      - SFTPGO_SFTPD__BINDINGS__0__PORT=2022
+      - SFTPGO_DEFAULT_ADMIN_USERNAME=${SFTPGO_ADMIN_USER:-admin}
+      - SFTPGO_DEFAULT_ADMIN_PASSWORD=${SFTPGO_ADMIN_PASSWORD:-password}
+      - SFTPGO_DATA_PROVIDER__CREATE_DEFAULT_ADMIN=true
+
+volumes:
+  minecraft_data:
+    name: minecraft_data
+  sftpgo_data:
+    name: sftpgo_data
