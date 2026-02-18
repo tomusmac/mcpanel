@@ -15,14 +15,10 @@ System opiera się na konteneryzacji (Docker), co gwarantuje pełną izolację p
 
 ### Panel Główny (Dashboard)
 ![Dashboard](docs/images/dashboard.png) 
-*Centralne centrum dowodzenia. Umożliwia podgląd statusu serwera, liczby graczy oraz sterowanie zasilaniem (Start/Stop).*
-
-### Monitoring Zasobów i Konsola
-![Konsola](docs/images/console.png)
-*Interaktywna konsola z kolorowaniem składni oraz wykresy użycia CPU, RAM, IO Dysku i Sieci w czasie rzeczywistym.*
+*Centralne centrum dowodzenia. Umożliwia podgląd statusu serwera, liczby graczy oraz sterowanie zasilaniem (Start/Stop). Posiada też konsole.*
 
 ### Zintegrowany Menedżer Plików
-![FileManager](docs/images/files.png
+![FileManager](docs/images/files.png)
 *Webowy klient SFTP umożliwiający zarządzanie plikami serwera, edycję konfiguracji oraz wgrywanie map i pluginów bez konieczności instalowania zewnętrznego oprogramowania.*
 
 ---
